@@ -1,8 +1,10 @@
 # Challenge-Front-End 🏅
 
-![Logo Pharm Inc.](./static/logo.png)
+<p align="center">
+  <img width="460" height="300" alt="Logo Pharm Inc." src="./static/logo.png">
+</p>
 
-## Description
+## Descrição
 Projeto de front end elaborado com base no estudo de caso proposto pela Coodesh.
 Uma empresa chamada de Pharm Inc. desejava a criação de um site para que houvessa a consulta dos dados de seus usuários, tendo assim, acesso as suas informações e compartilhamento de link, o qual o mesmo teria acesso a informação do usuário a qual teve o link compartilhado.
 
@@ -27,5 +29,5 @@ $ npm run start
 $ npm run generate
 ```
 
-## challenge by coodesh
+## Challenge by coodesh
 Este é um desafio proposto pela Coodesh.
