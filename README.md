@@ -1,7 +1,7 @@
 # Challenge-Front-End 🏅
 
 <p align="center">
-  <img width="460" height="300" alt="Logo Pharm Inc." src="./static/logo.png">
+  <img alt="Logo Pharm Inc." src="./static/logo.png">
 </p>
 
 ## Descrição
