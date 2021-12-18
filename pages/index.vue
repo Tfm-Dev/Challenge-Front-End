@@ -2,6 +2,7 @@
   <div>
     <CNav />
     <CBody />
+    <NuxtChild />
   </div>
 </template>
 

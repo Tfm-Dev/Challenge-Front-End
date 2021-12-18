@@ -1,9 +1,11 @@
 <template>
   <b-navbar type="light" variant="white">
-    <b-navbar-brand href="#">
+    <b-navbar-brand to="/">
       <img src="/logo.png" class="d-inline-block align-top" alt="Logo">
     </b-navbar-brand>
-    <h4>Pharm Inc.</h4>
+    <b-navbar-brand to="/">
+      <h4>Pharm Inc.</h4>
+    </b-navbar-brand>
     <b-navbar-nav class="ml-auto">
       <b-nav-item>
         <b-icon-person-circle scale="1.5" />
@@ -26,3 +28,7 @@ export default {
     },
 }
 </script>
+
+<style>
+.logo{text-decoration: none!important;}
+</style>
