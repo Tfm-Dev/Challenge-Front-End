@@ -3,39 +3,26 @@
         <p v-if="$fetchState.pending"><b-icon-three-dots animation="cylon" font-scale="4"></b-icon-three-dots></p>
         <p v-else-if="$fetchState.error">An error occurred :(</p>
         <div v-else>
-            <b-table id="dataTable" class="text-center" :filter="filter" :fields="fields" :items="items" :per-page="perPage" :current-page="currentPage" bordered @filtered="onFiltered">
+            <b-table id="dataTable" class="text-center" :filter="filter" :fields="fields" :items="items" bordered>
                 <template #cell(action)="data">
-                    <NuxtLink :to="{ path: 'user', query: { token: data.item.login.uuid }}"><b-button variant="primary" @click="opened">Ver mais</b-button></NuxtLink>
+                    <NuxtLink :to="'/user?token=' + data.item.login.uuid"><b-button variant="primary" @click="opened">Ver mais</b-button></NuxtLink>
                 </template>
             </b-table>
-            <b-pagination
-                v-model="currentPage"
-                pills
-                :total-rows="rows"
-                :per-page="perPage"
-                aria-controls="dataTable"
-                class="mx-auto"
-                align="center"
-            >
-                <template #first-text><span>&#60;&#60;</span></template>
-                <template #prev-text><span>&#60;</span></template>
-                <template #next-text><span>&#62;</span></template>
-                <template #last-text><span>&#62;&#62;</span></template>
-                <template #page="{ page, active }">
-                    <b v-if="active">{{ page }}</b>
-                    <i v-else>{{ page }}</i>
-                </template>
-            </b-pagination>
+            <a id="load" v-b-hover="hoverHandler" :href="'#page' + currentPage" @click="loadMore">
+                <b-icon-arrow-clockwise v-if="isHover" animation="spin"></b-icon-arrow-clockwise>
+                <b-icon-arrow-clockwise v-else></b-icon-arrow-clockwise>
+                Loading more
+            </a>
         </div>
     </div>
 </template>
 <script>
-import { BTable, BButton, BIconThreeDots } from 'bootstrap-vue'
+import { BTable, BButton, BIconThreeDots, BIconArrowClockwise } from 'bootstrap-vue'
 import { mapGetters } from 'vuex'
 
 export default {
     name: 'CTable',
-    components: { "b-table": BTable, "b-button": BButton, "b-icon-three-dots": BIconThreeDots },
+    components: { "b-table": BTable, "b-button": BButton, "b-icon-three-dots": BIconThreeDots, "b-icon-arrow-clockwise": BIconArrowClockwise },
     props: {
         filter: {
             Type: String,
@@ -56,19 +43,16 @@ export default {
                 { key: "dob", label: "Aniversário", formatter: 'birth' },
                 { key: "action", label: "Ação" }
             ],
-            perPage: 10,
+            isHover: false,
             currentPage: 1
         }
     },
     async fetch() {
-        const result = await this.$axios.get("https://randomuser.me/api/?seed=94c025a0a1ca3503&page=1&results=50&noinfo")
+        const result = await this.$axios.get("https://randomuser.me/api/?seed=94c025a0a1ca3503&page=1&results=10&noinfo")
         this.$store.commit('user/add', result.data.results)   
     },
     computed: {
-        ...mapGetters({items: 'user/users'}),
-        rows() {
-            return this.items.length
-        }
+        ...mapGetters({items: 'user/users'})
     },
     methods: {
         opened() {
@@ -81,13 +65,18 @@ export default {
             const split = value.date.split('T')[0].split('-')
             return `${split[2]}/${split[1]}/${split[0]}`
         },
-        onFiltered(filteredItems) {
-            this.rows = filteredItems.length
-            this.currentPage = 1
+        hoverHandler(isHovered) {
+            this.isHover = isHovered
+        },
+        async loadMore() {
+            this.currentPage += 1
+            const result = await this.$axios.get("https://randomuser.me/api/?seed=94c025a0a1ca3503&page="+ this.currentPage +"&results=10&noinfo")
+            this.$store.commit('user/push', result.data.results)
         }
     }
 }
 </script>
 <style>
 .up { margin-top: -75px; }
+#load { padding: 20px; text-decoration: none; color: black; }
 </style>

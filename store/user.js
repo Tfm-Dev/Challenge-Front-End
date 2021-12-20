@@ -3,8 +3,11 @@ export const state = () => ({
 })
 
 export const mutations = {
-    add (state, text) {
-        state.list = text
+    add (state, data) {
+        state.list = data
+    },
+    push (state, data) {
+        state.list.push(...data)
     }
 }
 
