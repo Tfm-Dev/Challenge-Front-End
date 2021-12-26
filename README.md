@@ -13,7 +13,7 @@ As frameworks utilizadas para a produção deste front end foram: Nuxtjs (Framew
 Além destas frameworks, outros recursos foram utilizados, os quais são: Eslint (Analise de código) e Prettier (Corretor de código).
 
 ## API
-Fora utilizada a API Radom User Generator para coletar de dados de usuários de forma que, o front end fosse contruido de um método genérico, para maiores informações sobre esta API, como por exemplo: documentação, aplicação, entre outros, acessar: ![RandomUser](https://randomuser.me/documentation)
+Fora utilizada a API Radom User Generator para coletar de dados de usuários de forma que, o front end fosse contruido de um método genérico, para maiores informações sobre esta API, como por exemplo: documentação, aplicação, entre outros, acessar: [RandomUser](https://randomuser.me/documentation)
 
 ## Configuração de compilação
 
