@@ -5,10 +5,10 @@
         <div v-else>
             <b-table id="dataTable" class="text-center" :filter="filter" :fields="fields" :items="items" bordered>
                 <template #cell(action)="data">
-                    <NuxtLink :to="'/user?token=' + data.item.login.uuid"><b-button variant="primary" @click="opened">Ver mais</b-button></NuxtLink>
+                    <NuxtLink :to="'/user?token=' + data.item.login.uuid + '#Page' + currentPage"><b-button variant="primary" @click="opened">Ver mais</b-button></NuxtLink>
                 </template>
             </b-table>
-            <a id="load" v-b-hover="hoverHandler" :href="'#page' + currentPage" @click="loadMore">
+            <a id="load" v-b-hover="hoverHandler" :href="'#Page' + currentPage" @click="loadMore">
                 <b-icon-arrow-clockwise v-if="isHover" animation="spin"></b-icon-arrow-clockwise>
                 <b-icon-arrow-clockwise v-else></b-icon-arrow-clockwise>
                 Loading more
@@ -48,11 +48,16 @@ export default {
         }
     },
     async fetch() {
-        const result = await this.$axios.get("https://randomuser.me/api/?seed=94c025a0a1ca3503&page=1&results=10&noinfo")
-        this.$store.commit('user/add', result.data.results)   
+        await this.$store.dispatch('user/fetchGet')   
     },
     computed: {
         ...mapGetters({items: 'user/users'})
+    },
+    async mounted() {
+        if(this.$route.hash !== "" && this.$route.hash.includes("#Page") && this.$route.hash.replace("#Page", "") > 1) {
+            this.currentPage = this.$route.hash.replace("#Page", "")
+            await this.$store.dispatch('user/fetchPage', this.currentPage)
+        }
     },
     methods: {
         opened() {
@@ -69,9 +74,8 @@ export default {
             this.isHover = isHovered
         },
         async loadMore() {
-            this.currentPage += 1
-            const result = await this.$axios.get("https://randomuser.me/api/?seed=94c025a0a1ca3503&page="+ this.currentPage +"&results=10&noinfo")
-            this.$store.commit('user/push', result.data.results)
+            this.currentPage = parseInt(this.currentPage) + 1
+            await this.$store.dispatch('user/fetchGetPage', this.currentPage)
         }
     }
 }

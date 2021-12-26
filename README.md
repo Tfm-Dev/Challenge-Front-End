@@ -10,22 +10,25 @@ Uma empresa chamada de Pharm Inc. desejava a criação de um site para que houve
 
 ## Tecnologias Utilizadas
 As frameworks utilizadas para a produção deste front end foram: Nuxtjs (Framework de Vuejs), Bootstrap Vue (Framework de Css para Vuejs) e Jest (Framework de teste em javascript).
-Além destas frameworks, outros recursos foram utilizados, os quais são: Axios (Cliente HTTP), Eslint (Analise de código) e Prettier (Corretor de código).
+Além destas frameworks, outros recursos foram utilizados, os quais são: Eslint (Analise de código) e Prettier (Corretor de código).
 
-## Build Setup
+## API
+Fora utilizada a API Radom User Generator para coletar de dados de usuários de forma que, o front end fosse contruido de um método genérico, para maiores informações sobre esta API, como por exemplo: documentação, aplicação, entre outros, acessar: ![RandomUser](https://randomuser.me/documentation)
+
+## Configuração de compilação
 
 ```bash
-# install dependencies
+# Instalar dependências
 $ npm install
 
-# serve with hot reload at localhost:3000
+# Serve with hot reload at localhost:3000
 $ npm run dev
 
-# build for production and launch server
+# Construir para produção e iniciar servidor
 $ npm run build
 $ npm run start
 
-# generate static project
+# Gerar projeto estatico
 $ npm run generate
 ```
 
