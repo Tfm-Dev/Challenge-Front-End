@@ -41,7 +41,7 @@
                         <p class="my-4">ID: {{ user.login.uuid }}</p>
                     </b-col>
                     <b-col class="mt_-3" cols="12">
-                        <p class="my-4">Link: <a :href="'http://localhost:3000'+$route.path+'?token='+user.login.uuid+$route.hash">http://localhost:3000{{ $route.path }}?token={{ user.login.uuid }}{{$route.hash}}</a></p>
+                        <p class="my-4">Link: <a :href="'http://'+Url()+$route.fullPath">http://{{ Url() }}{{ $route.fullPath }}</a></p>
                     </b-col>
                 </b-row>
             </b-container>
@@ -143,6 +143,9 @@ export default {
     methods: {
         formateDate(value) {
             return value.split("T")[0].split("-")[2] + "/" + value.split("T")[0].split("-")[1] + "/" + value.split("T")[0].split("-")[0]
+        },
+        Url() {
+            return window.location.host
         }
     }
 
