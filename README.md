@@ -30,6 +30,10 @@ $ npm run start
 
 # Gerar projeto estatico
 $ npm run generate
+
+# Gerando e executando uma imagem docker do App
+$ docker build -t front_end
+$ docker run -it -p 5000:5000 front_end
 ```
 
 ## Challenge by coodesh
